@@ -3,7 +3,11 @@
   "description": "Mutes and unmutes tabs at scheduled time.",
   "name": "tab-silence-scheduler",
   "offline_enabled": true,
-  "permissions": ["storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": ["storage", "alarms"],
   "options_page": "options.html",
   "version": "0.1"
 }
