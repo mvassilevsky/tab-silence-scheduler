@@ -27,6 +27,22 @@ function convertToDate(timeString) {
   return date.getTime();
 }
 
+function muteAll() {
+  chrome.tabs.query({}, function(tabList) {
+    tabList.forEach(function(tab) {
+      chrome.tabs.update(tab.id, { muted: true } );
+    });
+  });
+}
+
+function unmuteAll() {
+  chrome.tabs.query({}, function(tabList) {
+    tabList.forEach(function(tab) {
+      chrome.tabs.update(tab.id, { muted: false } );
+    });
+  });
+}
+
 // Saves options to chrome.storage
 function saveOptions(startTime, endTime) {
   chrome.storage.sync.set({
@@ -54,4 +70,10 @@ function restoreOptions() {
 document.addEventListener('DOMContentLoaded', restoreOptions);
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('save').addEventListener('click', setMuteTime);
+})
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('mute-all').addEventListener('click', muteAll);
+})
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('unmute-all').addEventListener('click', unmuteAll);
 })
